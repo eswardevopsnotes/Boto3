@@ -1,0 +1,22 @@
+import boto3
+from datetime import datetime
+
+def list_old_ebs_snapshots():
+    ec2 = boto3.client('ec2', region_name='your_region')  # Replace 'your_region' with your actual AWS region
+    
+    response = ec2.describe_snapshots(OwnerIds=['self'])
+    
+    old_snapshots = [snapshot for snapshot in response['Snapshots'] if snapshot['StartTime'].year < 2021]
+    
+    return old_snapshots
+
+# Call the function to list old EBS snapshots
+old_snapshots = list_old_ebs_snapshots()
+
+# Print the old snapshots
+for snapshot in old_snapshots:
+    print(snapshot['SnapshotId'], snapshot['StartTime'])
+
+
+#Permissions required for IAM ROle 
+#"ec2:DescribeImages","ec2:DescribeVolumes","ec2:DescribeSnapshots" and basic Lambda execution permision roles
