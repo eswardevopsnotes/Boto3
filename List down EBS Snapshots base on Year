@@ -20,3 +20,6 @@ for snapshot in old_snapshots:
 
 #Permissions required for IAM ROle 
 #"ec2:DescribeImages","ec2:DescribeVolumes","ec2:DescribeSnapshots" and basic Lambda execution permision roles
+#This lambda function uses the Boto3 library to interact with AWS services and the describe_snapshots method to retrieve information about EBS snapshots. 
+#It then filters the snapshots based on their creation date and prints out the IDs and start times of the old snapshots.
+# Remember to replace 'your_region' with your actual AWS region.
